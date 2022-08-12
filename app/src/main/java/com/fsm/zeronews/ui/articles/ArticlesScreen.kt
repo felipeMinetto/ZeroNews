@@ -1,4 +1,4 @@
-package com.fsm.zeronews
+package com.fsm.zeronews.ui.articles
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -12,26 +12,51 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.fsm.zeronews.R
+import com.fsm.zeronews.ui.models.Article
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
-fun ArticlesScreen(navController: NavController) {
+fun ArticlesScreen() {
     val articles = listOf(
-        "Article 1",
-        "Article 2",
-        "Article 3",
-        "Article 4",
-        "Article 5",
-        "Article 6"
+        Article("Article 1",
+            "Some nice article from the source",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
+        Article("Article 2",
+            "Some nice article from the source2",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
+        Article("Article 3",
+            "Some nice article from the source3",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
+        Article("Article 4",
+            "Some nice article from the source4",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
+        Article("Article 5",
+            "Some nice article from the source5",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
+        Article("Article 6",
+            "Some nice article from the source6",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022"),
     )
 
     ArticleList(articles)
 }
 
 @Composable
-fun ArticleList(articles: List<String>) {
+fun ArticleList(articles: List<Article>) {
     LazyColumn {
         items(articles) { article ->
             ArticleItem(article)
@@ -40,25 +65,34 @@ fun ArticleList(articles: List<String>) {
 }
 
 @Composable
-fun ArticleItem(article: String) {
+fun ArticleItem(article: Article) {
     Card(modifier = Modifier
         .padding(16.dp)
         .fillMaxWidth()
     ) {
-        Column(modifier = Modifier.padding(8.dp)) {
+        Column {
             AsyncImage(
-                model = "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+                model = article.imageURL,
                 placeholder = painterResource(id = R.drawable.article_image),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth(),
                 contentScale = ContentScale.FillWidth
             )
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(text = "Publish Date")
-            Text(text = article)
-            Text(text = "Author")
-            Text(text = "Description")
+            Column(modifier = Modifier
+                .padding(12.dp)) {
+                Text(text = article.title)
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Text(text = article.author)
+                    Spacer(modifier = Modifier)
+                    Text(text = article.publishedDate)
+                }
+                Text(text = article.description)
+            }
         }
     }
 
@@ -72,6 +106,11 @@ fun ArticleItem(article: String) {
 @Composable
 fun ArticlePreview() {
     ZeroNewsTheme {
-        ArticleItem(article = "Article X")
+        val article = Article("Article 1",
+            "Some nice article from the source",
+            "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+            "John Doe",
+            "01-01-2022")
+        ArticleItem(article = article)
     }
 }

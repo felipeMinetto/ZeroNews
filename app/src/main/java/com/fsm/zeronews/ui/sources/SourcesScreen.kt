@@ -1,4 +1,4 @@
-package com.fsm.zeronews
+package com.fsm.zeronews.ui.sources
 
 import android.content.res.Configuration
 import android.util.Log
@@ -16,24 +16,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.fsm.zeronews.ui.Screen
+import com.fsm.zeronews.ui.models.Source
 import com.fsm.zeronews.ui.theme.Typography
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
 fun SourcesScreen(navController: NavController) {
     val sources = listOf(
-        "Source 1",
-        "Source 2",
-        "Source 3",
-        "Source 4",
-        "Source 5",
-        "Source 6"
+        Source("s01", "Source 1", "description of the source", "https://source1.com"),
+        Source("s02", "Source 2", "description of the source", "https://source2.com"),
+        Source("s03", "Source 3", "description of the source", "https://source3.com"),
+        Source("s04", "Source 4", "description of the source", "https://source4.com"),
+        Source("s05", "Source 5", "description of the source", "https://source5.com"),
+        Source("s06", "Source 6", "description of the source", "https://source6.com"),
+        Source("s07", "Source 7", "description of the source", "https://source7.com"),
     )
     SourceList(sources) { navController.navigate(Screen.Articles.route) }
 }
 
 @Composable
-fun SourceList(sources: List<String>, navigateToArticles: (String) -> Unit) {
+fun SourceList(sources: List<Source>, navigateToArticles: (Source) -> Unit) {
     LazyColumn {
         items(sources) { source ->
             SourceItem(source = source) { src -> navigateToArticles(src) }
@@ -42,18 +44,18 @@ fun SourceList(sources: List<String>, navigateToArticles: (String) -> Unit) {
 }
 
 @Composable
-fun SourceItem(source: String, navigateToArticles: (String) -> Unit) {
+fun SourceItem(source: Source, navigateToArticles: (Source) -> Unit) {
     Card(modifier = Modifier
         .padding(4.dp)
         .fillMaxWidth()
         .clickable {
             Log.d("asd", "clicked article")
-            navigateToArticles("123")
+            navigateToArticles(source)
         }) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = source, style = Typography.subtitle1)
-            Text(text = "Url", style = Typography.body2)
-            Text(text = "Description", style = Typography.caption)
+            Text(text = source.title, style = Typography.subtitle1)
+            Text(text = source.URL, style = Typography.body2)
+            Text(text = source.description, style = Typography.caption)
         }
     }
 }
@@ -66,6 +68,7 @@ fun SourceItem(source: String, navigateToArticles: (String) -> Unit) {
 @Composable
 fun SourcePreview() {
     ZeroNewsTheme {
-        SourceItem(source = "Source 1") {}
+        val source = Source("s01", "Source 1", "description of the source", "https://source1.com")
+        SourceItem(source = source) {}
     }
 }

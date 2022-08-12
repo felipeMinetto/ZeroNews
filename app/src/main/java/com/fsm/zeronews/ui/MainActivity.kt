@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.fsm.zeronews.ArticlesScreen
-import com.fsm.zeronews.SourcesScreen
+import com.fsm.zeronews.ui.articles.ArticlesScreen
+import com.fsm.zeronews.ui.sources.SourcesScreen
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
                     NavHost(navController = navController, startDestination = Screen.Sources.route) {
                         composable(Screen.Sources.route) { SourcesScreen(navController = navController) }
-                        composable(Screen.Articles.route) { ArticlesScreen(navController = navController) }
+                        composable(Screen.Articles.route) { ArticlesScreen() }
                     }
                 }
             }
