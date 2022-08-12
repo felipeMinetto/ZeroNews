@@ -1,6 +1,8 @@
 package com.fsm.zeronews
 
 import android.content.res.Configuration
+import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,11 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.fsm.zeronews.ui.theme.Typography
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
-fun SourcesScreen() {
+fun SourcesScreen(navController: NavController) {
     val sources = listOf(
         "Source 1",
         "Source 2",
@@ -25,23 +28,27 @@ fun SourcesScreen() {
         "Source 5",
         "Source 6"
     )
-    SourceList(sources)
+    SourceList(sources) { navController.navigate(Screen.Articles.route) }
 }
 
 @Composable
-fun SourceList(sources: List<String>) {
+fun SourceList(sources: List<String>, navigateToArticles: (String) -> Unit) {
     LazyColumn {
         items(sources) { source ->
-            SourceItem(source = source)
+            SourceItem(source = source) { src -> navigateToArticles(src) }
         }
     }
 }
 
 @Composable
-fun SourceItem(source: String) {
+fun SourceItem(source: String, navigateToArticles: (String) -> Unit) {
     Card(modifier = Modifier
         .padding(4.dp)
-        .fillMaxWidth()) {
+        .fillMaxWidth()
+        .clickable {
+            Log.d("asd", "clicked article")
+            navigateToArticles("123")
+        }) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(text = source, style = Typography.subtitle1)
             Text(text = "Url", style = Typography.body2)
@@ -58,6 +65,6 @@ fun SourceItem(source: String) {
 @Composable
 fun SourcePreview() {
     ZeroNewsTheme {
-        SourceItem(source = "Source 1")
+        SourceItem(source = "Source 1") {}
     }
 }
