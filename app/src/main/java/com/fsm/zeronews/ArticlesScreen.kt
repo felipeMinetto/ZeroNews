@@ -1,8 +1,7 @@
 package com.fsm.zeronews
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import android.content.res.Configuration
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -13,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
 fun ArticlesScreen() {
@@ -40,7 +40,7 @@ fun ArticleList(articles: List<String>) {
 @Composable
 fun ArticleItem(article: String) {
     Card(modifier = Modifier
-        .padding(8.dp)
+        .padding(16.dp)
         .fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(8.dp)) {
@@ -51,6 +51,7 @@ fun ArticleItem(article: String) {
                 modifier = Modifier
                     .fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(16.dp))
             Text(text = "Publish Date")
             Text(text = article)
             Text(text = "Author")
@@ -61,7 +62,13 @@ fun ArticleItem(article: String) {
 }
 
 @Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
-fun Preview() {
-    ArticleItem(article = "Article X")
+fun ArticlePreview() {
+    ZeroNewsTheme {
+        ArticleItem(article = "Article X")
+    }
 }
