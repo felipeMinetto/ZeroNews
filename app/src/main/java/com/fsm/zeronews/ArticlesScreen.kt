@@ -1,13 +1,19 @@
 package com.fsm.zeronews
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
-@Preview(showBackground = true)
 @Composable
 fun ArticlesScreen() {
     val articles = listOf(
@@ -33,10 +39,29 @@ fun ArticleList(articles: List<String>) {
 
 @Composable
 fun ArticleItem(article: String) {
-    AsyncImage(
-        model = "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
-        contentDescription = ""
-    )
-    Text(text = article)
+    Card(modifier = Modifier
+        .padding(8.dp)
+        .fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(8.dp)) {
+            AsyncImage(
+                model = "https://english.chosun.com/site/data/img_dir/2022/08/12/2022081200636_0.jpg",
+                placeholder = painterResource(id = R.drawable.article_image),
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+            )
+            Text(text = "Publish Date")
+            Text(text = article)
+            Text(text = "Author")
+            Text(text = "Description")
+        }
+    }
 
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Preview() {
+    ArticleItem(article = "Article X")
 }
