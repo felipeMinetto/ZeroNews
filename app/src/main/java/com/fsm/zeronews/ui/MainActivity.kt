@@ -1,4 +1,4 @@
-package com.fsm.zeronews
+package com.fsm.zeronews.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,6 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.fsm.zeronews.ArticlesScreen
+import com.fsm.zeronews.SourcesScreen
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 class MainActivity : ComponentActivity() {

@@ -1,4 +1,4 @@
-package com.fsm.zeronews
+package com.fsm.zeronews.ui
 
 sealed class Screen(val route: String) {
     object Sources : Screen("sources")
