@@ -3,42 +3,57 @@ package com.fsm.zeronews.ui.sources
 import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.fsm.zeronews.ui.ErrorView
 import com.fsm.zeronews.ui.Screen
 import com.fsm.zeronews.ui.models.Source
+import com.fsm.zeronews.ui.shared.CircularIndeterminateProgress
 import com.fsm.zeronews.ui.theme.Typography
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
 fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
-    viewModel.fetchSources()
-    val sources = listOf(
-        Source("s01", "Source 1", "description of the source", "https://source1.com"),
-        Source("s02", "Source 2", "description of the source", "https://source2.com"),
-        Source("s03", "Source 3", "description of the source", "https://source3.com"),
-        Source("s04", "Source 4", "description of the source", "https://source4.com"),
-        Source("s05", "Source 5", "description of the source", "https://source5.com"),
-        Source("s06", "Source 6", "description of the source", "https://source6.com"),
-        Source("s07", "Source 7", "description of the source", "https://source7.com"),
-    )
-    SourceList(sources) { navController.navigate(Screen.Articles.route) }
+    val sources by remember { viewModel.sources }
+    val isLoading by remember { viewModel.isLoading }
+    val error by remember {
+        viewModel.error
+    }
+
+    Scaffold(topBar = {
+        TopAppBar(title = { Text(text = "Sources", color = Color.White) })
+    }) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularIndeterminateProgress(isVisible = isLoading)
+            if (error) {
+                ErrorView()
+            } else {
+                SourceList(sources) { navController.navigate(Screen.Articles.route) }
+            }
+        }
+    }
 }
 
 @Composable
 fun SourceList(sources: List<Source>, navigateToArticles: (Source) -> Unit) {
     LazyColumn {
-        items(sources) { source ->
+        items(
+            items = sources,
+            key = { source -> source.id }
+        ) { source ->
             SourceItem(source = source) { src -> navigateToArticles(src) }
         }
     }
@@ -54,9 +69,9 @@ fun SourceItem(source: Source, navigateToArticles: (Source) -> Unit) {
             navigateToArticles(source)
         }) {
         Column(modifier = Modifier.padding(8.dp)) {
-            Text(text = source.title, style = Typography.subtitle1)
-            Text(text = source.URL, style = Typography.body2)
-            Text(text = source.description, style = Typography.caption)
+            Text(text = source.title, style = Typography.h5)
+            Text(text = source.URL, style = Typography.caption)
+            Text(text = source.description, style = Typography.body2)
         }
     }
 }
