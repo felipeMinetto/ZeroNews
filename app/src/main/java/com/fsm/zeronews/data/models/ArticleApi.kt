@@ -1,9 +1,11 @@
 package com.fsm.zeronews.data.models
 
 import com.fsm.zeronews.ui.models.Article
+import com.squareup.moshi.JsonClass
 import java.text.SimpleDateFormat
 import java.util.*
 
+@JsonClass(generateAdapter = true)
 data class ArticleApi(
     val author: String,
     val title: String,

@@ -21,7 +21,8 @@ import com.fsm.zeronews.ui.theme.Typography
 import com.fsm.zeronews.ui.theme.ZeroNewsTheme
 
 @Composable
-fun SourcesScreen(navController: NavController) {
+fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
+    viewModel.fetchSources()
     val sources = listOf(
         Source("s01", "Source 1", "description of the source", "https://source1.com"),
         Source("s02", "Source 2", "description of the source", "https://source2.com"),
