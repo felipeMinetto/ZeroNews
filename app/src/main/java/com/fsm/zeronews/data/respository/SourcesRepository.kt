@@ -3,7 +3,7 @@ package com.fsm.zeronews.data.respository
 import com.fsm.zeronews.data.api.API
 import com.fsm.zeronews.data.models.ApiResult
 import com.fsm.zeronews.data.models.toUIModel
-import com.fsm.zeronews.ui.models.Source
+import com.fsm.zeronews.presentation.models.Source
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

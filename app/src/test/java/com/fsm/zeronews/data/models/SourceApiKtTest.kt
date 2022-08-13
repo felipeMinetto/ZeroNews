@@ -1,6 +1,6 @@
 package com.fsm.zeronews.data.models
 
-import com.fsm.zeronews.ui.models.Source
+import com.fsm.zeronews.presentation.models.Source
 import org.junit.Assert
 import org.junit.Test
 

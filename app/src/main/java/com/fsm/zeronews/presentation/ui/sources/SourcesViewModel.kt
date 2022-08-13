@@ -1,11 +1,11 @@
-package com.fsm.zeronews.ui.sources
+package com.fsm.zeronews.presentation.ui.sources
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fsm.zeronews.data.models.ApiResult
 import com.fsm.zeronews.data.respository.SourcesRepository
-import com.fsm.zeronews.ui.models.Source
+import com.fsm.zeronews.presentation.models.Source
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

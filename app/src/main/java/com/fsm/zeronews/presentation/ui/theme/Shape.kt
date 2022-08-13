@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui.theme
+package com.fsm.zeronews.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

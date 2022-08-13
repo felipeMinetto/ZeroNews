@@ -1,6 +1,6 @@
 package com.fsm.zeronews.data.models
 
-import com.fsm.zeronews.ui.models.Article
+import com.fsm.zeronews.presentation.models.Article
 import com.squareup.moshi.JsonClass
 import java.text.SimpleDateFormat
 import java.util.*

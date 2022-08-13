@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui
+package com.fsm.zeronews.presentation.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,10 +11,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.fsm.zeronews.ui.articles.ArticlesScreen
-import com.fsm.zeronews.ui.sources.SourcesScreen
-import com.fsm.zeronews.ui.sources.SourcesViewModel
-import com.fsm.zeronews.ui.theme.ZeroNewsTheme
+import com.fsm.zeronews.presentation.ui.articles.ArticlesScreen
+import com.fsm.zeronews.presentation.ui.sources.SourcesScreen
+import com.fsm.zeronews.presentation.ui.sources.SourcesViewModel
+import com.fsm.zeronews.presentation.ui.theme.ZeroNewsTheme
+import com.fsm.zeronews.presentation.utils.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

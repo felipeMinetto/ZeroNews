@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui.models
+package com.fsm.zeronews.presentation.models
 
 data class Article(
     val title: String,

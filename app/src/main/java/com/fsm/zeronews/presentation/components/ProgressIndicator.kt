@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui.shared
+package com.fsm.zeronews.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui.sources
+package com.fsm.zeronews.presentation.ui.sources
 
 import android.content.res.Configuration
 import android.util.Log
@@ -18,12 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.fsm.zeronews.ui.ErrorView
-import com.fsm.zeronews.ui.Screen
-import com.fsm.zeronews.ui.models.Source
-import com.fsm.zeronews.ui.shared.CircularIndeterminateProgress
-import com.fsm.zeronews.ui.theme.Typography
-import com.fsm.zeronews.ui.theme.ZeroNewsTheme
+import com.fsm.zeronews.presentation.components.CircularIndeterminateProgress
+import com.fsm.zeronews.presentation.components.ErrorView
+import com.fsm.zeronews.presentation.models.Source
+import com.fsm.zeronews.presentation.ui.theme.Typography
+import com.fsm.zeronews.presentation.ui.theme.ZeroNewsTheme
+import com.fsm.zeronews.presentation.utils.Screen
 
 @Composable
 fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {

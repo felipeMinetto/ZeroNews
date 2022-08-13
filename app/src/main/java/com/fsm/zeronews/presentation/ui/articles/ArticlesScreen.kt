@@ -1,4 +1,4 @@
-package com.fsm.zeronews.ui.articles
+package com.fsm.zeronews.presentation.ui.articles
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -14,8 +14,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.fsm.zeronews.R
-import com.fsm.zeronews.ui.models.Article
-import com.fsm.zeronews.ui.theme.ZeroNewsTheme
+import com.fsm.zeronews.presentation.models.Article
+import com.fsm.zeronews.presentation.ui.theme.ZeroNewsTheme
 
 @Composable
 fun ArticlesScreen() {
