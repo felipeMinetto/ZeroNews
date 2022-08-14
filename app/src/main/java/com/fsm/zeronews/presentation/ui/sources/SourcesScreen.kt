@@ -29,9 +29,8 @@ import com.fsm.zeronews.presentation.utils.Screen
 fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
     val sources by remember { viewModel.sources }
     val isLoading by remember { viewModel.isLoading }
-    val error by remember {
-        viewModel.error
-    }
+    val error by remember { viewModel.error }
+    val errorMessage by remember { viewModel.errorMessage }
 
     Scaffold(topBar = {
         TopAppBar(title = { Text(text = "Sources", color = Color.White) })
@@ -39,7 +38,7 @@ fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
         Box(modifier = Modifier.fillMaxSize()) {
             CircularIndeterminateProgress(isVisible = isLoading)
             if (error) {
-                ErrorView()
+                ErrorView(message = errorMessage, retry = { viewModel.fetchSources() })
             } else {
                 SourceList(sources) { navController.navigate(Screen.Articles.route) }
             }

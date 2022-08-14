@@ -70,5 +70,28 @@ class SourcesViewModelTest {
         assertEquals(viewModel.isLoading.value, false)
     }
 
+    @Test
+    fun `fetchSources sets isLoading and error when called a second time after error`() = runTest {
+        repository.stub {
+            onBlocking { fetchSources() } doReturn ApiResult.Error(Exception("Error message"))
+        }
+        val viewModel = SourcesViewModel(repository, TestDispatchers(testScheduler))
+        advanceUntilIdle()
+        assertEquals(viewModel.isLoading.value, false)
+        assertEquals(viewModel.error.value, true)
+
+        repository.stub {
+            onBlocking { fetchSources() } doReturn ApiResult.Success(sourceApiList) as ApiResult<List<Source>>
+        }
+        viewModel.fetchSources()
+
+        assertEquals(viewModel.isLoading.value, true)
+        assertEquals(viewModel.error.value, false)
+
+        advanceUntilIdle()
+        assertEquals(viewModel.isLoading.value, false)
+        assertEquals(viewModel.sources.value, sourceApiList)
+        assertEquals(viewModel.error.value, false)
+    }
 
 }

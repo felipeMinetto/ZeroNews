@@ -20,17 +20,21 @@ class SourcesViewModel @Inject constructor(
     val sources = mutableStateOf(emptyList<Source>())
     val isLoading = mutableStateOf(true)
     val error = mutableStateOf(false)
+    val errorMessage = mutableStateOf("")
 
     init {
         fetchSources()
     }
 
-    private fun fetchSources() {
+    fun fetchSources() {
+        isLoading.value = true
+        error.value = false
         viewModelScope.launch(dispatchers.default) {
             when (val sourceResponse = sourcesRepository.fetchSources()) {
                 is ApiResult.Error -> {
                     isLoading.value = false
                     error.value = true
+                    errorMessage.value = sourceResponse.exception?.message ?: ""
                 }
                 is ApiResult.Success -> {
                     isLoading.value = false
