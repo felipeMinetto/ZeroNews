@@ -2,32 +2,34 @@ package com.fsm.zeronews.data
 
 import com.fsm.zeronews.data.models.ArticleApi
 import com.fsm.zeronews.data.models.SourceApi
+import com.fsm.zeronews.data.models.SourcesResponse
+import com.fsm.zeronews.presentation.models.Source
 import java.util.*
 
 
-val sourceList = listOf(
-    SourceApi("123",
+val sourceApiList = listOf(
+    SourceApi("1",
         "Source Name",
         "Description of the source",
         "https://source.com",
         "category",
         "en",
         "US"),
-    SourceApi("123",
+    SourceApi("2",
         "Source Name",
         "Description of the source",
         "https://source.com",
         "category",
         "en",
         "US"),
-    SourceApi("123",
+    SourceApi("3",
         "Source Name",
         "Description of the source",
         "https://source.com",
         "category",
         "en",
         "US"),
-    SourceApi("123",
+    SourceApi("4",
         "Source Name",
         "Description of the source",
         "https://source.com",
@@ -36,7 +38,48 @@ val sourceList = listOf(
         "US")
 )
 
-val articeleList = listOf(
+val sourceList = listOf(
+    Source(
+        "1",
+        "Source Name",
+        "Description of the source",
+        "https://source.com",
+    ),
+    Source(
+        "2",
+        "Source Name",
+        "Description of the source",
+        "https://source.com",
+    ),
+    Source(
+        "3",
+        "Source Name",
+        "Description of the source",
+        "https://source.com",
+    ),
+    Source(
+        "4",
+        "Source Name",
+        "Description of the source",
+        "https://source.com",
+    ),
+)
+
+val sourcesResponseSuccess = SourcesResponse(
+    status = "ok",
+    sources = sourceApiList,
+    code = null,
+    message = null
+)
+
+val sourcesResponseError = SourcesResponse(
+    status = "error",
+    sources = null,
+    message = "Failed to load sources",
+    code = "error code"
+)
+
+val articleApiList = listOf(
     ArticleApi("John Doe",
         "Article 1",
         "Some nice article from the source",

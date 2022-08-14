@@ -3,7 +3,7 @@ package com.fsm.zeronews.presentation.ui.sources
 import com.fsm.zeronews.TestDispatchers
 import com.fsm.zeronews.data.models.ApiResult
 import com.fsm.zeronews.data.respository.SourcesRepository
-import com.fsm.zeronews.data.sourceList
+import com.fsm.zeronews.data.sourceApiList
 import com.fsm.zeronews.presentation.models.Source
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -18,14 +18,14 @@ import org.mockito.kotlin.stub
 class SourcesViewModelTest {
 
     private val repository: SourcesRepository = mock {
-        onBlocking { fetchSources() } doReturn ApiResult.Success(sourceList) as ApiResult<List<Source>>
+        onBlocking { fetchSources() } doReturn ApiResult.Success(sourceApiList) as ApiResult<List<Source>>
     }
 
     @Test
     fun `fetchSources sets sources on success`() = runTest {
         val viewModel = SourcesViewModel(repository, TestDispatchers(testScheduler))
         advanceUntilIdle()
-        assertEquals(viewModel.sources.value, sourceList)
+        assertEquals(viewModel.sources.value, sourceApiList)
         assertEquals(viewModel.error.value, false)
     }
 
@@ -37,6 +37,18 @@ class SourcesViewModelTest {
         val viewModel = SourcesViewModel(repository, TestDispatchers(testScheduler))
         advanceUntilIdle()
         assertEquals(viewModel.error.value, true)
+        assertEquals(viewModel.errorMessage.value, "")
+    }
+
+    @Test
+    fun `fetchSources sets errorMessage on specific error`() = runTest {
+        repository.stub {
+            onBlocking { fetchSources() } doReturn ApiResult.Error(Exception("Error message"))
+        }
+        val viewModel = SourcesViewModel(repository, TestDispatchers(testScheduler))
+        advanceUntilIdle()
+        assertEquals(viewModel.error.value, true)
+        assertEquals(viewModel.errorMessage.value, "Error message")
     }
 
     @Test
