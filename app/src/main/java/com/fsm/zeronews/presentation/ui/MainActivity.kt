@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.fsm.zeronews.presentation.ui.articles.ArticlesScreen
+import com.fsm.zeronews.presentation.ui.articles.ArticlesViewModel
 import com.fsm.zeronews.presentation.ui.sources.SourcesScreen
 import com.fsm.zeronews.presentation.ui.sources.SourcesViewModel
 import com.fsm.zeronews.presentation.ui.theme.ZeroNewsTheme
@@ -31,7 +32,11 @@ class MainActivity : ComponentActivity() {
                             val viewModel = hiltViewModel<SourcesViewModel>()
                             SourcesScreen(navController = navController, viewModel)
                         }
-                        composable(Screen.Articles.route) { ArticlesScreen() }
+                        composable(Screen.Articles.route) {
+                            val source = it.arguments?.getString("source").orEmpty()
+                            val viewModel = hiltViewModel<ArticlesViewModel>()
+                            ArticlesScreen(viewModel, source)
+                        }
                     }
                 }
             }

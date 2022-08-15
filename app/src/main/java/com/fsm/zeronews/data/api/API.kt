@@ -10,9 +10,10 @@ interface API {
     @GET("/v2/top-headlines/sources")
     suspend fun getSources(): SourcesResponse
 
-    @GET("/v2/top-headlines/sources")
+    @GET("/v2/everything")
     suspend fun getArticles(
         @Query("page") page: Int,
-        @Query("page_size") page_size: Int,
+        @Query("pageSize") page_size: Int,
+        @Query("sources") source: String,
     ): ArticlesResponse
 }

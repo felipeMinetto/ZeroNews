@@ -9,4 +9,6 @@ data class ArticlesResponse(
     val message: String?,
     val totalResult: Int?,
     val articles: List<ArticleApi>?,
-)
+) {
+    val isSuccess = status == "ok"
+}

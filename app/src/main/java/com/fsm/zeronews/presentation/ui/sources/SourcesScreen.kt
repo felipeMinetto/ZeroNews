@@ -23,7 +23,6 @@ import com.fsm.zeronews.presentation.components.ErrorView
 import com.fsm.zeronews.presentation.models.Source
 import com.fsm.zeronews.presentation.ui.theme.Typography
 import com.fsm.zeronews.presentation.ui.theme.ZeroNewsTheme
-import com.fsm.zeronews.presentation.utils.Screen
 
 @Composable
 fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
@@ -40,7 +39,7 @@ fun SourcesScreen(navController: NavController, viewModel: SourcesViewModel) {
             if (error) {
                 ErrorView(message = errorMessage, retry = { viewModel.fetchSources() })
             } else {
-                SourceList(sources) { navController.navigate(Screen.Articles.route) }
+                SourceList(sources) { source -> navController.navigate("articles/${source.id}") }
             }
         }
     }
@@ -70,7 +69,7 @@ fun SourceItem(source: Source, navigateToArticles: (Source) -> Unit) {
         Column(modifier = Modifier.padding(8.dp)) {
             Text(text = source.title, style = Typography.h5)
             Text(text = source.URL, style = Typography.caption)
-            Text(text = source.description, style = Typography.body2)
+            Text(text = source.description, style = Typography.body1)
         }
     }
 }
