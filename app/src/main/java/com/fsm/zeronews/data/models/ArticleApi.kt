@@ -1,7 +1,6 @@
 package com.fsm.zeronews.data.models
 
 import com.squareup.moshi.JsonClass
-import java.util.*
 
 @JsonClass(generateAdapter = true)
 data class ArticleApi(
@@ -10,7 +9,7 @@ data class ArticleApi(
     val description: String,
     val url: String,
     val urlToImage: String?,
-    val publishedAt: Date,
+    val publishedAt: String,
     val content: String,
 )
 
