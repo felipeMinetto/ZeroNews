@@ -1,4 +1,4 @@
-package com.fsm.zeronews.di
+package com.fsm.zeronews.utils
 
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter

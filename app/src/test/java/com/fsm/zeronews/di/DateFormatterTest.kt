@@ -1,6 +1,7 @@
 package com.fsm.zeronews.di
 
 import com.fsm.zeronews.mockDate
+import com.fsm.zeronews.utils.DateFormatter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
