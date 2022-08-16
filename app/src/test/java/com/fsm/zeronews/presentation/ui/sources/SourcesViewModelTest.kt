@@ -3,8 +3,8 @@ package com.fsm.zeronews.presentation.ui.sources
 import com.fsm.zeronews.TestDispatchers
 import com.fsm.zeronews.data.models.ApiResult
 import com.fsm.zeronews.data.respository.SourcesRepository
-import com.fsm.zeronews.data.sourceApiList
 import com.fsm.zeronews.presentation.models.Source
+import com.fsm.zeronews.sourceApiList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest

@@ -1,11 +1,8 @@
 package com.fsm.zeronews.data.respository
 
-import com.fsm.zeronews.TestDispatchers
+import com.fsm.zeronews.*
 import com.fsm.zeronews.data.api.API
 import com.fsm.zeronews.data.models.ApiResult
-import com.fsm.zeronews.data.sourceList
-import com.fsm.zeronews.data.sourcesResponseError
-import com.fsm.zeronews.data.sourcesResponseSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -55,5 +52,13 @@ class SourcesRepositoryTest {
 
         val expected = ApiResult.Error(exception)
         assertEquals(expected, result)
+    }
+
+    @Test
+    fun `toUIModel converts SourceApi to Source`() {
+        val sourceApi = sourceApiList.first()
+        val expected = sourceList.first()
+
+        assertEquals(expected, sourceApi.toUIModel())
     }
 }
