@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Card
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -16,7 +19,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import com.fsm.zeronews.presentation.models.Article
 import com.fsm.zeronews.presentation.ui.theme.Typography
@@ -25,16 +27,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun ArticlesScreen(viewModel: ArticlesViewModel, source: String) {
-    ArticleList(articles = viewModel.fetchArticles(source))
+    Scaffold(topBar = {
+        TopAppBar(title = { Text(text = "Articles", color = Color.White) })
+    }) {
+        ArticleList(articles = viewModel.fetchArticles(source))
+    }
 }
 
 @Composable
 fun ArticleList(articles: Flow<PagingData<Article>>) {
     val lazyArticles = articles.collectAsLazyPagingItems()
-    LazyColumn {
-        items(lazyArticles) { article ->
-            article?.let {
-                ArticleItem(article)
+    LazyVerticalGrid(columns = GridCells.Adaptive(250.dp)) {
+        items(lazyArticles.itemCount) { index ->
+            lazyArticles[index]?.let {
+                ArticleItem(it)
             }
         }
     }
